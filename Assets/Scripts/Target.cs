@@ -5,9 +5,15 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     private Rigidbody targetRb;
+    //private GameManager gameManager;
+    private EventManager eventManager;
+    [SerializeField] private ParticleSystem expParticle;
+
     // Start is called before the first frame update
     void Start()
     {
+        //gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        eventManager = GameObject.Find("Event Manager").GetComponent<EventManager>();
         targetRb = GetComponent<Rigidbody>();
 
         //randomly select launch location
@@ -29,7 +35,22 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
+        Instantiate(expParticle, transform.position, expParticle.transform.rotation);
         Destroy(gameObject);
+        if(CompareTag("Bad Target"))
+        {
+            //gameManager.UpdateScore(-10);
+            //if(eventManager.TargetDestroyed != null)
+            //{
+            //    eventManager.TargetDestroyed.Invoke();
+            //}
+            eventManager.targetDestroyed?.Invoke(-10);
+        }
+        else if(CompareTag("Good Target"))
+        {
+            //gameManager.UpdateScore(10);
+            eventManager.targetDestroyed?.Invoke(10);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
