@@ -8,5 +8,7 @@ public class EventManager : MonoBehaviour
     [System.Serializable] public class TargetDestroyed : UnityEvent<int> { }
     public TargetDestroyed targetDestroyed;
 
+    public UnityEvent gameOverEvent;
+
     //[SerializeField] private int speed;
 }

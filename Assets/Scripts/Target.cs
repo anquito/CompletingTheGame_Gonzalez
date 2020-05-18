@@ -55,6 +55,8 @@ public class Target : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //This is where game over text needs to be signaled
+        eventManager.gameOverEvent?.Invoke();
         Destroy(gameObject);
     }
 }
