@@ -5,10 +5,12 @@ using UnityEngine.Events;
 
 public class EventManager : MonoBehaviour
 {
+    //[SerializeField] private int speed;
     [System.Serializable] public class TargetDestroyed : UnityEvent<int> { }
     public TargetDestroyed targetDestroyed;
 
     public UnityEvent gameOverEvent;
 
-    //[SerializeField] private int speed;
+    [System.Serializable] public class StartGameEvent : UnityEvent<int> { }
+    public StartGameEvent startGameEvent;
 }
